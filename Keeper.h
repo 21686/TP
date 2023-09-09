@@ -1,10 +1,11 @@
 #pragma once
 #include "Base.h"
-using namespace std;
+
 class Keeper:public familyTree
 {
-	char ancestorMale;
-	char ancestorFemale;
+public:
+	string ancestorMale;
+	string ancestorFemale;
 	void GetInfo();
 };
 

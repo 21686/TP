@@ -1,26 +1,28 @@
 #pragma once
 #include <iostream>
+#include <fstream>
 #define None "none";
+
 using namespace std;
 class familyTree
 {
 public:
-	char name;
-	char surname;
-	char secondName;
-	char partner;
-	int childrenNumber;
+	string name;
+	string surname;
+	string secondName;
+	string partner;
+	int childrenNumber = 0;
 	// Набор основных параметров для конкретного члена семьи. Дата реализована отдельным классом
-	int dayBirth;
-	int monthBirth;
-	int yearBirth;
-	int Age;
-	int dayDeath;
-	int monthDeath;
-	int yearDeath;
+	int dayBirth=0;
+	int monthBirth=0;
+	int yearBirth=0;
+	int Age=0;
+	int dayDeath=0;
+	int monthDeath=0;
+	int yearDeath=0;
 	void GetDate();
 	void GetStatus();
-	void GetInfo();
+	void GetINfo();
 	void GetChildrenInfo();
 };
 

@@ -1,0 +1,29 @@
+Father: Abob
+Mother: Adobe
+
+Name adas
+Surname: asdasd
+Second Name: asdsa
+Day of birth: 12
+Month of birth: 12
+Year of birth: 1111
+Age: 12
+Person is alive
+Partner: fdsafasf
+Child number 0: sdasdads
+Child number 1: sdasdadas
+Father: ffndndgn
+Mother: dnfngdndnd
+
+Name sadsd
+Surname: asdasdas
+Second Name: dssdas
+Date of birth: 12.12.1111
+Age: 12
+Person is alive
+Partner: dsfvdvds
+Child number 0: cdvsvs
+Child number 1: vsvsvsvs
+Father: sdfbdfn
+Mother: dg
+
