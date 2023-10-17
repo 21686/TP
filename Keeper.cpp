@@ -1,15 +1,9 @@
 #include "Keeper.h"
-
+#include <string>
 
 void Keeper::GetInfo()
 {
-	//made in Base.cpp
-		//cout << "Enter the NAME" << endl;
-		//cin >> user.name;
-		//cout << "Enter the SURNAME" << endl;
-		//cin >> user.surname;
-		//cout << "Enter the SECOND NAME" << endl;
-		//cin >> user.secondName;
+
 	GetINfo();
 	GetDate();
 	GetStatus();
@@ -23,4 +17,12 @@ void Keeper::GetInfo()
 	fout << "Mother: " << ancestorFemale << endl;
 	fout << endl;
 	fout.close();
+}
+
+void Keeper::deleteInfo() {
+	string key, line;
+	cout << "Enter the Name of man whose data you want to change" << endl;
+	cin >> key;
+	ofstream fout("FamilyTree.txt", ios::app);
+	while (key != getline(fout, line));
 }

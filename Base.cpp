@@ -5,12 +5,25 @@ ofstream fout("FamilyTree.txt", ios::app);
 void familyTree::GetDate() {
 	cout << "Enter the DAY of Birth" << endl;
 	cin >> dayBirth;
+	if (dayBirth > 31 || dayBirth <= 0) {
+		cout << "Enter the CORRECT DAY of Birth" << endl;
+		cin >> dayBirth;
+	}
 
 	cout << "Enter the MONTH of Birth" << endl;
 	cin >> monthBirth;
+	if (monthBirth > 12 || monthBirth <= 0) {
+		cout << "Enter the CORRECT MONTH of Birth" << endl;
+		cin >> monthBirth;
+	}
 
 	cout << "Enter the YEAR of Birth" << endl;
 	cin >> yearBirth;
+	if (yearBirth > 2023 || yearBirth <= 1900) {
+		cout << "Enter the CORRECT YEAR of Birth" << endl;
+		cin >> yearBirth;
+	}
+
 	fout << "Date of birth: " << dayBirth << "." << monthBirth << "." << yearBirth << endl;
 
 	cout << "Enter the AGE" << endl;
@@ -25,13 +38,25 @@ void familyTree::GetDate() {
 	if (k == 2) {// if not alive
 		cout << "Enter the DAY of Death" << endl;
 		cin >> dayDeath;
+		if (dayDeath > 31 || dayDeath <= 0) {
+			cout << "Enter the CORRECT DAY of Death" << endl;
+			cin >> dayDeath;
+		}
 
 		cout << "Enter the MONTH of Death" << endl;
 		cin >> monthDeath;
+		if (monthDeath > 12 || monthDeath <= 0) {
+			cout << "Enter the CORRECT MONTH of Death" << endl;
+			cin >> monthDeath;
+		}
 
 		cout << "Enter the YEAR of Death" << endl;
 		cin >> yearDeath;
 		fout << "Date of death: " << dayDeath << "." << monthDeath << "." << yearDeath << endl;
+		if (yearDeath > 2023 || yearDeath <= 1900) {
+			cout << "Enter the CORRECT YEAR of Death" << endl;
+			cin >> yearDeath;
+		}
 	}
 	else {
 		fout << "Person is alive" << endl;
@@ -68,6 +93,7 @@ void familyTree::GetStatus() {
 		fout << "Does not married: " << endl;
 	}
 }
+
 void familyTree::GetChildrenInfo() {
 	cout << "Enter the NUMBER of children" << endl;
 	cin >> childrenNumber;
