@@ -1,0 +1,13 @@
+Name adfs
+Surname: asdd
+Second Name: sdadas
+Name dfsdfds
+Surname: dsffs
+Second Name: sdds
+Date of birth: 23.12.1990
+Age: 16
+Person is alive
+Partner: sfdfgfds
+Father: DAdsa
+Mother: adsAAS
+
