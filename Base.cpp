@@ -5,23 +5,38 @@ ofstream fout("FamilyTree.txt", ios::app);
 void familyTree::GetDate() {
 	cout << "Enter the DAY of Birth" << endl;
 	cin >> dayBirth;
-	if (dayBirth > 31 || dayBirth <= 0) {
-		cout << "Enter the CORRECT DAY of Birth" << endl;
-		cin >> dayBirth;
+	try {
+		if (dayBirth > 31 || dayBirth <= 0) {
+			throw std::out_of_range("Enter the CORRECT DAY of Birth");
+		}
+	}
+	catch (const std::out_of_range& e) {
+		std::cerr << "Error: " << e.what() << std::endl;
+		std::cout << "Enter the correct DAY";
+		std::cin >> dayBirth;
 	}
 
 	cout << "Enter the MONTH of Birth" << endl;
 	cin >> monthBirth;
-	if (monthBirth > 12 || monthBirth <= 0) {
-		cout << "Enter the CORRECT MONTH of Birth" << endl;
-		cin >> monthBirth;
+	try {
+		if (monthBirth > 12 || monthBirth <= 0) {
+			throw std::out_of_range("Enter the CORRECT MONTH of Birth");
+		}
 	}
+	catch (const std::out_of_range& e) {
+		std::cerr << "Îøèáêà: " << e.what() << std::endl;
+	}
+
 
 	cout << "Enter the YEAR of Birth" << endl;
 	cin >> yearBirth;
-	if (yearBirth > 2023 || yearBirth <= 1900) {
-		cout << "Enter the CORRECT YEAR of Birth" << endl;
-		cin >> yearBirth;
+	try {
+		if (yearBirth > 2023 || yearBirth <= 1900) {
+			throw std::out_of_range("Enter the CORRECT YEAR of Birth");
+		}
+	}
+	catch (const std::out_of_range& e) {
+		std::cerr << "Îøèáêà: " << e.what() << std::endl;
 	}
 
 	fout << "Date of birth: " << dayBirth << "." << monthBirth << "." << yearBirth << endl;
@@ -38,25 +53,44 @@ void familyTree::GetDate() {
 	if (k == 2) {// if not alive
 		cout << "Enter the DAY of Death" << endl;
 		cin >> dayDeath;
-		if (dayDeath > 31 || dayDeath <= 0) {
-			cout << "Enter the CORRECT DAY of Death" << endl;
-			cin >> dayDeath;
+		try {
+			if (dayDeath > 31 || dayDeath <= 0) {
+				throw std::out_of_range("Enter the CORRECT DAY of Death");
+			}
 		}
+		catch (const std::out_of_range& e) {
+			std::cerr << "Îøèáêà: " << e.what() << std::endl;
+		}
+
 
 		cout << "Enter the MONTH of Death" << endl;
 		cin >> monthDeath;
-		if (monthDeath > 12 || monthDeath <= 0) {
+		try {
+			if (monthDeath > 12 || monthDeath <= 0) {
+				throw std::out_of_range("Enter the CORRECT MONTH of Death");
+			}
+		}
+		catch (const std::out_of_range& e) {
+			std::cerr << "Îøèáêà: " << e.what() << std::endl;
 			cout << "Enter the CORRECT MONTH of Death" << endl;
 			cin >> monthDeath;
 		}
 
+
 		cout << "Enter the YEAR of Death" << endl;
 		cin >> yearDeath;
 		fout << "Date of death: " << dayDeath << "." << monthDeath << "." << yearDeath << endl;
-		if (yearDeath > 2023 || yearDeath <= 1900) {
-			cout << "Enter the CORRECT YEAR of Death" << endl;
-			cin >> yearDeath;
-		}
+			try {
+				if (yearDeath > 2023 || yearDeath <= 1900) {
+					throw std::out_of_range("Enter the CORRECT YEAR of Death");
+				}
+			}
+			catch (const std::out_of_range& e) {
+				std::cerr << "Îøèáêà: " << e.what() << std::endl;
+				cout << "Enter the CORRECT YEAR of Death" << endl;
+				cin >> yearDeath;
+			}
+
 	}
 	else {
 		fout << "Person is alive" << endl;
@@ -89,7 +123,6 @@ void familyTree::GetStatus() {
 		fout << "Partner: " << partner << endl;
 	}
 	else {
-		partner = *None;
 		fout << "Does not married: " << endl;
 	}
 }
