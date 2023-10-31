@@ -2,29 +2,31 @@
 // make file writing
 ofstream fout("FamilyTree.txt", ios::app);
 
-void familyTree::GetDate() {
+void Base::GetDate() {
 	cout << "Enter the DAY of Birth" << endl;
 	cin >> dayBirth;
 	try {
 		if (dayBirth > 31 || dayBirth <= 0) {
-			throw std::out_of_range("Enter the CORRECT DAY of Birth");
+			throw out_of_range("Enter the CORRECT DAY of Birth");
 		}
 	}
-	catch (const std::out_of_range& e) {
-		std::cerr << "Error: " << e.what() << std::endl;
-		std::cout << "Enter the correct DAY";
-		std::cin >> dayBirth;
+	catch (const out_of_range& e) {
+		cerr << "Error: " << e.what() << endl;
+		cout << "Enter the correct DAY" << endl;;
+		cin >> dayBirth;
 	}
 
 	cout << "Enter the MONTH of Birth" << endl;
 	cin >> monthBirth;
 	try {
 		if (monthBirth > 12 || monthBirth <= 0) {
-			throw std::out_of_range("Enter the CORRECT MONTH of Birth");
+			throw out_of_range("Enter the CORRECT MONTH of Birth");
 		}
 	}
-	catch (const std::out_of_range& e) {
-		std::cerr << "Îøèáêà: " << e.what() << std::endl;
+	catch (const out_of_range& e) {
+		cerr << "Îøèáêà: " << e.what() << endl;
+		cout << "Enter the correct MONTH" << endl;;
+		cin >> monthBirth;
 	}
 
 
@@ -32,18 +34,20 @@ void familyTree::GetDate() {
 	cin >> yearBirth;
 	try {
 		if (yearBirth > 2023 || yearBirth <= 1900) {
-			throw std::out_of_range("Enter the CORRECT YEAR of Birth");
+			throw out_of_range("Enter the CORRECT YEAR of Birth");
 		}
 	}
-	catch (const std::out_of_range& e) {
-		std::cerr << "Îøèáêà: " << e.what() << std::endl;
+	catch (const out_of_range& e) {
+		cerr << "Îøèáêà: " << e.what() << endl;
+		cout << "Enter the correct YEAR" << endl;;
+		cin >> yearBirth;
 	}
 
-	fout << "Date of birth: " << dayBirth << "." << monthBirth << "." << yearBirth << endl;
+	fout << dayBirth << endl << monthBirth << endl << yearBirth << endl;
 
 	cout << "Enter the AGE" << endl;
 	cin >> Age;
-	fout << "Age: " << Age << endl;
+	fout << Age << endl;
 
 	cout << "Does the person alive?" << endl;
 	cout << "1.Yes" << endl;
@@ -55,11 +59,11 @@ void familyTree::GetDate() {
 		cin >> dayDeath;
 		try {
 			if (dayDeath > 31 || dayDeath <= 0) {
-				throw std::out_of_range("Enter the CORRECT DAY of Death");
+				throw out_of_range("Enter the CORRECT DAY of Death");
 			}
 		}
-		catch (const std::out_of_range& e) {
-			std::cerr << "Îøèáêà: " << e.what() << std::endl;
+		catch (const out_of_range& e) {
+			cerr << "Îøèáêà: " << e.what() << endl;
 		}
 
 
@@ -67,11 +71,11 @@ void familyTree::GetDate() {
 		cin >> monthDeath;
 		try {
 			if (monthDeath > 12 || monthDeath <= 0) {
-				throw std::out_of_range("Enter the CORRECT MONTH of Death");
+				throw out_of_range("Enter the CORRECT MONTH of Death");
 			}
 		}
-		catch (const std::out_of_range& e) {
-			std::cerr << "Îøèáêà: " << e.what() << std::endl;
+		catch (const out_of_range& e) {
+			cerr << "Îøèáêà: " << e.what() << endl;
 			cout << "Enter the CORRECT MONTH of Death" << endl;
 			cin >> monthDeath;
 		}
@@ -79,7 +83,7 @@ void familyTree::GetDate() {
 
 		cout << "Enter the YEAR of Death" << endl;
 		cin >> yearDeath;
-		fout << "Date of death: " << dayDeath << "." << monthDeath << "." << yearDeath << endl;
+		
 			try {
 				if (yearDeath > 2023 || yearDeath <= 1900) {
 					throw std::out_of_range("Enter the CORRECT YEAR of Death");
@@ -90,28 +94,29 @@ void familyTree::GetDate() {
 				cout << "Enter the CORRECT YEAR of Death" << endl;
 				cin >> yearDeath;
 			}
-
+			fout << dayDeath << endl << monthDeath << endl << yearDeath << endl;
 	}
 	else {
-		fout << "Person is alive" << endl;
+		fout << "1" << endl;
 	}
+	
 }
 
-void familyTree::GetINfo() {
+void Base::GetINfo() {
 	cout << "Enter the NAME" << endl;
 	cin >> name;
-	fout << "Name " << name << endl;
+	fout << name << endl;
 
 	cout << "Enter the SURNAME" << endl;
 	cin >> surname;
-	fout << "Surname: " << surname << endl;
+	fout << surname << endl;
 
 	cout << "Enter the SECOND NAME" << endl;
 	cin >> secondName;
-	fout << "Second Name: " << secondName << endl;
+	fout << secondName << endl;
 }
 
-void familyTree::GetStatus() {
+void Base::GetStatus() {
 	cout << "Does the person married?" << endl;
 	cout << "1.Yes" << endl;
 	cout << "2.No" << endl;
@@ -119,22 +124,30 @@ void familyTree::GetStatus() {
 	cin >> k;
 	if (k == 1) {// if married
 		cout << "Enter the FULL NAME of partner" << endl;
-		cin >> partner;
-		fout << "Partner: " << partner << endl;
+		cin.clear();
+		cin.ignore();
+		getline(cin,partner,'\n');
+		fout << partner << endl;
 	}
 	else {
-		fout << "Does not married: " << endl;
+		partner = "none";
 	}
 }
 
-void familyTree::GetChildrenInfo() {
+void Base::GetChildrenInfo() {
 	cout << "Enter the NUMBER of children" << endl;
 	cin >> childrenNumber;
 	string childName;
-	for (int i = 0; i < childrenNumber; i++) {
-		cout << "Enter the Name of child" << endl;
-		cin >> childName;
-		fout << "Child number " << i << ": " << childName << endl;
+
+	if (childrenNumber != 0) {
+		
+		for (int i = 0; i < childrenNumber; i++) {
+			cout << "Enter the Name of child" << endl;
+			cin >> childName;
+			children[i] = childName;
+			k++;
+		}
 	}
+	
 	fout.close();
 }

@@ -1,25 +1,23 @@
 #pragma once
-#include "Base.h"
+#include "FamilyTree.h"
 #include <string>
 #include <iostream>
 
 
-class Keeper :public familyTree
+class Keeper :public FamilyTree
 {
 public:
-	string ancestorMale;
-	string ancestorFemale;
+	FamilyTree* familyArray; 
+	int capacity; // Вместимость массива
+	int size=1; 
 
-	Keeper() : ancestorMale(), ancestorFemale() {}
+	Keeper(int initialCapacity = 10) : capacity(initialCapacity), size(0) {
+		familyArray = new FamilyTree[capacity];
+	}
 
-	Keeper(string _ancestorMale,string _ancestorFemale): ancestorMale(_ancestorMale), ancestorFemale(_ancestorFemale){}
-	~Keeper() {}
-
-	void GetInfo();
-	void deleteLinesAfterString(string targetString);
-	void showFile();
-	void changeObject(string targetString);
-	void addPart(string targetString);
-
+	~Keeper() {
+		delete[] familyArray;
+	}
+	int changeSize(int cnt);
 };
 
