@@ -1,2 +1,4 @@
 ﻿  Keeper.cpp
-  Технология программирования.vcxproj -> C:\Users\kiril\source\repos\TP-main\x64\Debug\Технология программирования.exe
+  main.cpp
+  Создание кода...
+LINK : fatal error LNK1168: не удается открыть C:\Users\kiril\source\repos\TP-main\x64\Debug\Технология программирования.exe для записи

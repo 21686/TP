@@ -1,258 +1,181 @@
 #include "FamilyTree.h"
-#include "Keeper.h"
 
-FamilyTree user;
-Keeper keep;
+ofstream fout("FamilyTree.txt", ios::app);
 
-void FamilyTree::getInfo()
-{
-    user.GetINfo();
-    user.GetDate();
-    user.GetStatus();
-    user.GetChildrenInfo();
-
-    cout << "Enter the FULL NAME of male parent" << endl;
-    cin.clear();
-    cin.ignore();
-    string k;
-    getline(cin, k, '\n');
-    user.ancestorMale = k;
-    cout << "Enter the FULL NAME of female parent" << endl;
-    cin.clear();
-    cin.ignore();
-    getline(cin, k, '\n');
-    user.ancestorFemale = k;
-    
-    if (keep.size < keep.capacity) {
-        keep.familyArray[keep.size] = user;
-        keep.size++;
+FamilyTree& FamilyTree::operator=(const FamilyTree& other) {
+    if (this == &other) {
+        return *this;
     }
-    else {
-        cerr << "Контейнер переполнен." << endl;
-    }
+    FamilyTree another(other);
+    name = another.name;
+    surname = another.surname;
+    secondName = another.secondName;
+    dayBirth = another.dayBirth;
+    monthBirth = another.monthBirth;
+    yearBirth = another.yearBirth;
+    Age = another.Age;
+    dayDeath = another.dayDeath;
+    monthDeath = another.monthDeath;
+    yearDeath = another.yearDeath;
+    partner = another.partner;
+    childrenNumber = another.childrenNumber;
+    ancestorMale = another.ancestorMale;
+    ancestorFemale = another.ancestorFemale;
+    return *this;
 }
 
 
+void FamilyTree::GetDate() {
+    cout << "Enter the DAY of Birth" << endl;
+    cin >> dayBirth;
+    try {
+        if (dayBirth > 31 || dayBirth <= 0) {
+            throw out_of_range("Enter the CORRECT DAY of Birth");
+        }
+    }
+    catch (const out_of_range& e) {
+        cerr << "Error: " << e.what() << endl;
+        cout << "Enter the correct DAY" << endl;;
+        cin >> dayBirth;
+    }
 
-void FamilyTree::deleteLinesAfterString()
-{
-    cout << "Enter the number of object you want to delete" << endl;
+    cout << "Enter the MONTH of Birth" << endl;
+    cin >> monthBirth;
+    try {
+        if (monthBirth > 12 || monthBirth <= 0) {
+            throw out_of_range("Enter the CORRECT MONTH of Birth");
+        }
+    }
+    catch (const out_of_range& e) {
+        cerr << "Ошибка: " << e.what() << endl;
+        cout << "Enter the correct MONTH" << endl;;
+        cin >> monthBirth;
+    }
+
+
+    cout << "Enter the YEAR of Birth" << endl;
+    cin >> yearBirth;
+    try {
+        if (yearBirth > 2023 || yearBirth <= 1900) {
+            throw out_of_range("Enter the CORRECT YEAR of Birth");
+        }
+    }
+    catch (const out_of_range& e) {
+        cerr << "Ошибка: " << e.what() << endl;
+        cout << "Enter the correct YEAR" << endl;;
+        cin >> yearBirth;
+    }
+
+    fout << dayBirth << endl << monthBirth << endl << yearBirth << endl;
+
+    cout << "Enter the AGE" << endl;
+    cin >> Age;
+    fout << Age << endl;
+
+    cout << "Does the person alive?" << endl;
+    cout << "1.Yes" << endl;
+    cout << "2.No" << endl;
     int k;
     cin >> k;
-    for (int i = 0; i < keep.size; i++) {
-        if (i == k) {
-            continue;
+    if (k == 2) {// if not alive
+        cout << "Enter the DAY of Death" << endl;
+        cin >> dayDeath;
+        try {
+            if (dayDeath > 31 || dayDeath <= 0) {
+                throw out_of_range("Enter the CORRECT DAY of Death");
+            }
         }
-        for (int j = i; j < keep.size - 1; j++) {
-            keep.familyArray[j] = keep.familyArray[j + 1];
+        catch (const out_of_range& e) {
+            cerr << "Ошибка: " << e.what() << endl;
         }
 
+
+        cout << "Enter the MONTH of Death" << endl;
+        cin >> monthDeath;
+        try {
+            if (monthDeath > 12 || monthDeath <= 0) {
+                throw out_of_range("Enter the CORRECT MONTH of Death");
+            }
+        }
+        catch (const out_of_range& e) {
+            cerr << "Ошибка: " << e.what() << endl;
+            cout << "Enter the CORRECT MONTH of Death" << endl;
+            cin >> monthDeath;
+        }
+
+
+        cout << "Enter the YEAR of Death" << endl;
+        cin >> yearDeath;
+
+        try {
+            if (yearDeath > 2023 || yearDeath <= 1900) {
+                throw std::out_of_range("Enter the CORRECT YEAR of Death");
+            }
+        }
+        catch (const std::out_of_range& e) {
+            std::cerr << "Ошибка: " << e.what() << std::endl;
+            cout << "Enter the CORRECT YEAR of Death" << endl;
+            cin >> yearDeath;
+        }
+        fout << dayDeath << endl << monthDeath << endl << yearDeath << endl;
     }
-    keep.size--;
-    cout << "Operation finished" << endl;
+    else {
+        fout << "1" << endl;
+    }
 
+}
+
+void FamilyTree::GetINfo() {
+
+    cout << "Enter the NAME" << endl;
+    cin >> name;
+    fout << name << endl;
+
+    cout << "Enter the SURNAME" << endl;
+    cin >> surname;
+    fout << surname << endl;
+
+    cout << "Enter the SECOND NAME" << endl;
+    cin >> secondName;
+    fout << secondName << endl;
+}
+
+void FamilyTree::GetStatus() {
+    cout << "Does the person married?" << endl;
+    cout << "1.Yes" << endl;
+    cout << "2.No" << endl;
+    int k;
+    cin >> k;
+    if (k == 1) {// if married
+        cout << "Enter the FULL NAME of partner" << endl;
+        cin.clear();
+        cin.ignore();
+        getline(cin, partner, '\n');
+        fout << partner << endl;
+    }
+    else {
+        partner = "none";
+    }
+}
+
+void FamilyTree::GetChildrenInfo() {
+    cout << "Enter the NUMBER of children" << endl;
+    cin >> childrenNumber;
+    string childName;
+
+    if (childrenNumber != 0) {
+
+        for (int i = 0; i < childrenNumber; i++) {
+            cout << "Enter the Name of child" << endl;
+            cin >> childName;
+            children[i] = childName;
+            k++;
+        }
+    }
+
+    fout.close();
 }
 
 
 
-void FamilyTree::SHOW() {
 
-    string out;
-
-    for (int i = 0; i < keep.size; i++) {// CHANGE SIZEEEEEEEEEEEEEE
-        cout << "---------------------------------------------------------" << endl;
-        cout << "Name: " << keep.familyArray[i].name << endl;
-        cout << "Surname: " << keep.familyArray[i].surname << endl;
-        cout << "SecondName: " << keep.familyArray[i].secondName << endl;
-        cout << "Date of birth: " << keep.familyArray[i].dayBirth << "." << keep.familyArray[i].monthBirth << "." << keep.familyArray[i].yearBirth << endl;
-        cout << "Date of death: " << keep.familyArray[i].dayDeath << "." << keep.familyArray[i].monthDeath << "." << keep.familyArray[i].yearDeath << endl;
-        cout << "Age: " << keep.familyArray[i].Age << endl;
-        cout << "Partner: " << keep.familyArray[i].partner << endl;
-        cout << "Children number: " << keep.familyArray[i].childrenNumber << endl;//<< "Children: "
-        if (keep.familyArray[i].childrenNumber != 0) {
-            for (int j = 0; j < keep.familyArray[i].childrenNumber; j++)
-            {
-                cout << keep.familyArray[i].children[j] << endl;
-            }
-        }
-        else {
-            cout << "---" << endl;
-        }
-        cout <<"Father: " << keep.familyArray[i].ancestorMale << endl;
-        cout <<"Mother: " << keep.familyArray[i].ancestorFemale << endl;
-    }
-}
-
-
-
-void FamilyTree::changeObject(string targetString) {
-   
-    string line, newLine;
-    std::streampos lastLinePos = 0;
-
-    cout << "How you want to change it?" << endl;
-
-    getline(cin, newLine);
-    cout << "Write a number of person whose data you want to change" << endl;
-    int num;
-    cin >> num;
-
-    for (int i = 0; i < keep.size; i++) {
-        if (i == num) {
-            cout << "What do u want to change?" << endl;
-            string k;
-            cin.ignore(); // Очистка буфера ввода перед чтением строки
-            std::getline(cin, k);
-            if (k == "Name")
-                keep.familyArray[i].name = newLine;
-            if (k == "Surame")
-                keep.familyArray[i].surname = newLine;
-            if (k == "Second name")
-                keep.familyArray[i].secondName = newLine;
-            if (k == "Date of birth") {
-                keep.familyArray[i].GetDate();
-            }
-            if (k == "Date of death") {
-                keep.familyArray[i].GetDate();
-            }
-            if (k == "Age")
-                keep.familyArray[i].Age = stoi(newLine);// convert to int
-            if (k == "Partner")
-                keep.familyArray[i].partner = newLine;
-            break;
-        }
-    }
-
-    std::cout << "Operation finished" << endl;
-}
-
-
-
-void FamilyTree::MergeData() {
-
-    ifstream file("FamilyTree.txt");
-    if (!file) {
-        cerr << "Не удается открыть файл " << "FamilyTree.txt" << endl;
-        return;
-    }
-
-    string line;
-    int cnt = 0;
-    string l;
-    fstream f("4Size.txt", std::ios::in | std::ios::out);
-    getline(f, l);
-    cnt = stoi(l);
-    keep.changeSize(cnt);
-    for (int i = 0; i < keep.size; i++) {
-        getline(file, line);
-        keep.familyArray[i].name = line;
-
-        getline(file, line);
-        keep.familyArray[i].surname = line;
-
-        getline(file, line);
-        keep.familyArray[i].secondName = line;
-
-        getline(file, line);
-        keep.familyArray[i].dayBirth= stoi(line);
-
-        getline(file, line);
-        keep.familyArray[i].monthBirth = stoi(line);
-
-        getline(file, line);
-        keep.familyArray[i].yearBirth = stoi(line);
-
-        getline(file, line);
-        keep.familyArray[i].dayDeath = stoi(line);
-
-        getline(file, line);
-        keep.familyArray[i].monthDeath = stoi(line);
-
-        getline(file, line);
-        keep.familyArray[i].yearDeath = stoi(line);
-
-        getline(file, line);
-       // if (yearDeath == 0 && dayDeath == 0 && monthDeath == 0) {
-          //  cout << "alive" << endl;
-       // }
-        keep.familyArray[i].Age = stoi(line);
-
-        getline(file, line);
-        keep.familyArray[i].partner = line;
-
-        getline(file, line);
-        keep.familyArray[i].childrenNumber= stoi(line);
-        if (keep.familyArray[i].childrenNumber != 0) {
-            for (int j = 0; j < keep.familyArray[i].childrenNumber; j++)
-            {
-                getline(file, line);
-                keep.familyArray[i].children[j] = line;
-            }
-        }
-        else {
-            getline(file, line);
-            if (line == "---") {
-                cout << "correct" << endl;
-
-            }
-            else {
-                cout << "ERROR" << endl;
-            }
-
-        }
-
-        getline(file, line);
-        keep.familyArray[i].ancestorMale = line;
-        getline(file, line);
-        keep.familyArray[i].ancestorFemale = line;
-        getline(file, line);
-        if (line == "END") {
-            cout << "Success!" << endl;
-
-        }
-        else {
-            cout << "ERROR" << endl;
-        }
-    }
-   cout << "Operation finished" << endl;
-   
-    file.close();
-}
-
-
-
-void FamilyTree::Save() {
-   ofstream file("FamilyTree.txt");
-
-    if (!file.is_open()) {
-        std::cerr << "Error";
-        return;
-    }
-    for (int i = 0; i < keep.size; i++) {
-        file << keep.familyArray[i].name << endl;// name
-        file  << keep.familyArray[i].surname << endl;//<< "Surname: "
-        file  << keep.familyArray[i].secondName << endl;// << "SecondName: "
-        file  << keep.familyArray[i].dayBirth << endl << keep.familyArray[i].monthBirth << endl << keep.familyArray[i].yearBirth << endl;//<< "Date of birth: "
-        file  << keep.familyArray[i].dayDeath << endl << keep.familyArray[i].monthDeath << endl << keep.familyArray[i].yearDeath << endl; //<< "Date of death: "
-        file << keep.familyArray[i].Age << endl;// << "Age: "
-        file  << keep.familyArray[i].partner << endl;//<< "Partner: "
-        file  << keep.familyArray[i].childrenNumber << endl;//<< "Children: "
-        if (keep.familyArray[i].childrenNumber!=0){
-        for (int j = 0; j < keep.familyArray[i].childrenNumber; j++)
-        {
-            file << keep.familyArray[i].children[j] << endl;
-        }
-        }
-        else {
-            file << "---" << endl;
-        }
-        file << keep.familyArray[i].ancestorMale << endl;
-        file << keep.familyArray[i].ancestorFemale << endl;
-        file << "END" << endl;
-    }
-    cout << "Success!" << endl;
-    fstream f("4Size.txt", std::ios::out);
-    f << keep.size << endl;
-    f.close();
-    file.close();
-}
