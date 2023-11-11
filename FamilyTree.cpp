@@ -6,21 +6,27 @@ FamilyTree& FamilyTree::operator=(const FamilyTree& other) {
     if (this == &other) {
         return *this;
     }
-    FamilyTree another(other);
-    name = another.name;
-    surname = another.surname;
-    secondName = another.secondName;
-    dayBirth = another.dayBirth;
-    monthBirth = another.monthBirth;
-    yearBirth = another.yearBirth;
-    Age = another.Age;
-    dayDeath = another.dayDeath;
-    monthDeath = another.monthDeath;
-    yearDeath = another.yearDeath;
-    partner = another.partner;
-    childrenNumber = another.childrenNumber;
-    ancestorMale = another.ancestorMale;
-    ancestorFemale = another.ancestorFemale;
+    name = other.name;
+    surname = other.surname;
+    secondName = other.secondName;
+    dayBirth = other.dayBirth;
+    monthBirth = other.monthBirth;
+    yearBirth = other.yearBirth;
+    Age = other.Age;
+    dayDeath = other.dayDeath;
+    monthDeath = other.monthDeath;
+    yearDeath = other.yearDeath;
+    partner = other.partner;
+    childrenNumber = other.childrenNumber;
+    if (other.childrenNumber != 0) {
+        for (int j = 0; j < other.childrenNumber; j++)
+        {
+            children[j] = other.children[j];
+        }
+    }
+    ancestorMale = other.ancestorMale;
+    ancestorFemale = other.ancestorFemale;
+    cout << "Copy constructor called" << endl;
     return *this;
 }
 
@@ -35,7 +41,7 @@ void FamilyTree::GetDate() {
     }
     catch (const out_of_range& e) {
         cerr << "Error: " << e.what() << endl;
-        cout << "Enter the correct DAY" << endl;;
+        
         cin >> dayBirth;
     }
 
@@ -48,7 +54,7 @@ void FamilyTree::GetDate() {
     }
     catch (const out_of_range& e) {
         cerr << "Îøèáêà: " << e.what() << endl;
-        cout << "Enter the correct MONTH" << endl;;
+        
         cin >> monthBirth;
     }
 
@@ -62,7 +68,7 @@ void FamilyTree::GetDate() {
     }
     catch (const out_of_range& e) {
         cerr << "Îøèáêà: " << e.what() << endl;
-        cout << "Enter the correct YEAR" << endl;;
+      
         cin >> yearBirth;
     }
 
@@ -87,6 +93,7 @@ void FamilyTree::GetDate() {
         }
         catch (const out_of_range& e) {
             cerr << "Îøèáêà: " << e.what() << endl;
+            cin >> dayDeath;
         }
 
 
@@ -99,7 +106,7 @@ void FamilyTree::GetDate() {
         }
         catch (const out_of_range& e) {
             cerr << "Îøèáêà: " << e.what() << endl;
-            cout << "Enter the CORRECT MONTH of Death" << endl;
+  
             cin >> monthDeath;
         }
 
@@ -114,7 +121,7 @@ void FamilyTree::GetDate() {
         }
         catch (const std::out_of_range& e) {
             std::cerr << "Îøèáêà: " << e.what() << std::endl;
-            cout << "Enter the CORRECT YEAR of Death" << endl;
+       
             cin >> yearDeath;
         }
         fout << dayDeath << endl << monthDeath << endl << yearDeath << endl;

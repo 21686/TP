@@ -40,13 +40,6 @@ public:
 		cout << "Default constructor called for FamilyTree." << endl;
 	}
 
-	FamilyTree(const FamilyTree& other) {
-		name = other.name;
-		surname = other.surname;
-		secondName = other.secondName;
-		cout << "Copy constructor called 4 ." << endl;
-
-	}
 
 	FamilyTree& operator=(const FamilyTree& other);
 
